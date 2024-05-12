@@ -10,18 +10,17 @@ typedef struct process {
     struct process* next;
 } process;
  
-void SJF(process* head){
+void SJF(process* head)//å®šä¹‰SJFè°ƒåº¦å‡½æ•°
+{
     process* current, *next, *min;
     int time = 0;
-    int stime=0;
-    int runtime;
-    int ftime;
- 
+    
     if (head == NULL)
         return;
  
     current = head;
-    while(current != NULL){
+    while(current != NULL)//æ¯”è¾ƒæœ€çŸ­è¿è¡Œæ—¶é—´
+    {
         min = current;
         next = current->next;
         while(next != NULL){
@@ -31,12 +30,10 @@ void SJF(process* head){
         }
         
         	time=time+min->p_time;
-        	printf("½ø³ÌÍê³ÉÊ±¼ä%d£º\n",time);
-        
-		
- 
-        
-        if(min == current) {
+        	printf("è¿›ç¨‹å®Œæˆæ—¶é—´%dï¼š\n",time);
+                
+        if(min == current) //åˆ¤æ–­éžç©º
+	{
             if(min->next != NULL)
                 current = min->next;
             else
@@ -61,23 +58,20 @@ void SJF(process* head){
 int main(){
     process* head = NULL;
     process* current;
-    int n, i,name, p_time,runtime,ftime;
+    int n, i,name, p_time;
  
-    printf("ÇëÊäÈë×Ü½ø³ÌÊý: ");
+    printf("è¯·è¾“å…¥æ€»è¿›ç¨‹æ•°: ");
     scanf("%d", &n);
- 
-    
+     
     for(i =1; i<=n; i++){
-	printf("ÇëÊäÈëµÚ%d¸ö½ø³ÌµÄÃû ÔËÐÐÊ±¼ä:\n",i);
+	printf("è¯·è¾“å…¥ç¬¬%dä¸ªè¿›ç¨‹çš„å è¿è¡Œæ—¶é—´:\n",i);
         scanf("%s%d",name,&p_time);
         current = (process*)malloc(sizeof(process));
         current->p_time = p_time;
         current->next = head;
         head = current;
     }
-    
-		
- 
+     
     SJF(head);
     return 0;
 }
